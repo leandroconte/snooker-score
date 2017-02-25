@@ -1,0 +1,19 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.table td.op-user {
+    text-align: right;
+}
+.table td {
+    text-align: left;
+}
+.btn-point {
+    margin-right: 7px;
+}
+.op-user {
+    text-align: right;
+}
