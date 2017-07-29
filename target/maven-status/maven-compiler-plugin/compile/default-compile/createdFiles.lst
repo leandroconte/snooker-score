@@ -1,7 +1,0 @@
-org/lera/snooker/repository/UserRepository.class
-org/lera/snooker/Application.class
-org/lera/snooker/repository/ScoreRepository.class
-org/lera/snooker/services/ScoreService.class
-org/lera/snooker/domain/User.class
-org/lera/snooker/domain/Score.class
-org/lera/snooker/controller/UserController.class
