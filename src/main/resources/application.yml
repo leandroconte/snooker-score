@@ -3,10 +3,10 @@ spring:
       name: SnookerScore
 
     datasource:
-      driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost/snooker?useSSL=false
-      username: root
-      password: 123mudar
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://localhost/snooker?useSSL=false
+          username: root
+          password: lera77
 
     jpa:
       hibernate:
@@ -15,6 +15,28 @@ spring:
 server:
     port: 8080
     context-path: /snook
+
+---
+spring:
+  profiles: production
+
+  datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost/snooker?useSSL=false
+        username: root
+        password: 123mudar
+
+
+---
+
+spring:
+  profiles: development
+
+  datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost/snooker?useSSL=false
+        username: root
+        password: lera77
 
 
 #logging:

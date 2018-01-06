@@ -40,7 +40,8 @@
 
         for (var i = 0; i < users.length; i++) {
             var $trBody = $(document.createElement("tr"))
-                .attr("id", "user-" + users[i].id);
+                .attr("id", "user-" + users[i].id)
+                .addClass("hover-item");
 
             var $tdName = $(document.createElement("td"))
                 .addClass("col-sm-2")
@@ -84,7 +85,7 @@
             $tBody.append($trBody);
         }
         _defineWinner(users);
-    }
+    };
 
     var _defineWinner = function(users) {
         var maxScore = 0;

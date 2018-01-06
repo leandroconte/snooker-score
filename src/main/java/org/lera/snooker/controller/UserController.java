@@ -29,7 +29,7 @@ public class UserController {
      *          201, if a new user was created.
      *
      */
-    @RequestMapping(value = "/user", method = RequestMethod.POST) //TODO: must return the user object.
+    @PostMapping("/user") //TODO: must return the user object.
     private ResponseEntity<Long> createUser(@RequestBody User user) {
 
         if (user.getName().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
@@ -50,7 +50,7 @@ public class UserController {
      * @param userId the user's ID.
      * @return 404, if user not found; 200 if one point was added.
      */
-    @RequestMapping(value = "/user/{userId}/plus", method = RequestMethod.PATCH)
+    @PatchMapping("/user/{userId}/plus")
     private HttpStatus plusScore(@PathVariable("userId") Long userId) {
         if (!userRepository.exists(userId)) {
             return HttpStatus.NOT_FOUND;
@@ -66,7 +66,7 @@ public class UserController {
      * @param userId the user's ID.
      * @return 404, if user not found; 200 if one point was subtracted.
      */
-    @RequestMapping(value = "/user/{userId}/minus", method = RequestMethod.PATCH)
+    @PatchMapping("/user/{userId}/minus")
     private HttpStatus minusScore(@PathVariable("userId") Long userId) {
         if (!userRepository.exists(userId)) {
             return HttpStatus.NOT_FOUND;
@@ -81,7 +81,7 @@ public class UserController {
      *
      * @return A list of all users.
      */
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @GetMapping("/user")
     private ResponseEntity<Iterable<User>> findAll() {
         Iterable<User> users = userRepository.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
@@ -96,7 +96,7 @@ public class UserController {
      *          400, if the new score is less than 0;
      *          200 if the score was updated.
      */
-    @RequestMapping(value = "/user/{userId}/scoreboard", method = RequestMethod.PATCH)
+    @PatchMapping("/user/{userId}/scoreboard")
     private HttpStatus setScore(@PathVariable("userId") Long userId, @RequestParam("score") int newScore) {
 
         if (!userRepository.exists(userId)) {
@@ -114,7 +114,7 @@ public class UserController {
         return HttpStatus.OK;
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
+    @DeleteMapping("/user/{userId}")
     private HttpStatus deleteUser(@PathVariable("userId") Long userId) {
         if (!userRepository.exists(userId)) {
             return HttpStatus.NOT_FOUND;

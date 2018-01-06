@@ -35,7 +35,7 @@ public class User {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_to_score"),nullable = false, unique = true)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_to_score"), nullable = false, unique = true)
     private Score score = new Score();
 
     public Long getId() {

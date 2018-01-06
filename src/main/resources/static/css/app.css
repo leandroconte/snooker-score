@@ -17,3 +17,12 @@ body {
 .op-user {
     text-align: right;
 }
+
+tr.hover-item:hover, tr.hover-item:hover > td {
+    background: #e7f4ff !important;
+    cursor: pointer;
+}
+tr.hover-item:active, tr.hover-item:active > td {
+    background: #cae7ff !important;
+    cursor: pointer;
+}
