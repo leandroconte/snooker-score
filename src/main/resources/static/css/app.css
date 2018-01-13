@@ -19,10 +19,9 @@ body {
 }
 
 tr.hover-item:hover, tr.hover-item:hover > td {
-    background: #e7f4ff !important;
     cursor: pointer;
 }
-tr.hover-item:active, tr.hover-item:active > td {
-    background: #cae7ff !important;
+tr.hover-item:active, tr.item-active {
+    background: #e7f4ff !important;
     cursor: pointer;
 }

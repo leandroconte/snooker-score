@@ -1,21 +1,19 @@
 package org.lera.snooker.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lnd on 06/02/17.
  */
 @Entity
-public class User {
+public class Player {
 
     @Id
     @GeneratedValue
@@ -35,8 +33,8 @@ public class User {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_to_score"), nullable = false, unique = true)
-    private Score score = new Score();
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_player_to_score"), nullable = false, unique = true)
+    private List<Score> scores = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -72,11 +70,11 @@ public class User {
         this.name = name;
     }
 
-    public Score getScore() {
-        return score;
+    public List<Score> getScores() {
+        return scores;
     }
 
-    public void setScore(Score score) {
-        this.score = score;
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 }

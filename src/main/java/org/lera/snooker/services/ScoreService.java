@@ -1,9 +1,8 @@
 package org.lera.snooker.services;
 
+import org.lera.snooker.domain.Player;
 import org.lera.snooker.domain.Score;
-import org.lera.snooker.domain.User;
-import org.lera.snooker.repository.ScoreRepository;
-import org.lera.snooker.repository.UserRepository;
+import org.lera.snooker.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ScoreService {
 
-    private final UserRepository userRepository;
+    private final PlayerRepository playerRepository;
 
     @Autowired
-    public ScoreService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public ScoreService(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
     @Transactional
-    public void setScoreboard(Long userId, boolean plus) {
-        User user = userRepository.findOne(userId);
-        Score score = user.getScore();
+    public void setScoreboard(Long playerId, boolean plus) {
+        Player player = playerRepository.findOne(playerId);
+        Score score = player.getScores();
         if (plus) {
             score.setPoints(score.getPoints() + 1);
         } else {

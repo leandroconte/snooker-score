@@ -6,11 +6,11 @@ spring:
           driverClassName: com.mysql.jdbc.Driver
           url: jdbc:mysql://localhost/snooker?useSSL=false
           username: root
-          password: lera77
+          password: batata22
 
     jpa:
       hibernate:
-        ddl-auto: none
+        ddl-auto: update
 
 server:
     port: 8080
@@ -24,7 +24,7 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost/snooker?useSSL=false
         username: root
-        password: 123mudar
+        password: batata22
 
 
 ---
