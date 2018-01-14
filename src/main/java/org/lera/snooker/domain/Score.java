@@ -14,9 +14,6 @@ public class Score {
     private Long id;
 
     @Column
-    private int points = 0;
-
-    @Column
     private Date date = new Date();
 
     public Long getId() {
@@ -25,14 +22,6 @@ public class Score {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
     public Date getDate() {

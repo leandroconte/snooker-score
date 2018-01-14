@@ -1,0 +1,15 @@
+body {
+    margin-top: 50px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.danger {
+    color: #d9534f;
+}

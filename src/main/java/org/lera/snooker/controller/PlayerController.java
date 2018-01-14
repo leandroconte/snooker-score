@@ -1,7 +1,9 @@
 package org.lera.snooker.controller;
 
 import org.lera.snooker.domain.Player;
+import org.lera.snooker.domain.Score;
 import org.lera.snooker.repository.PlayerRepository;
+import org.lera.snooker.repository.ScoreRepository;
 import org.lera.snooker.services.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by lnd on 09/02/17.
  */
-@RestController("/player")
+@RestController
+@RequestMapping("/player")
 public class PlayerController {
 
     @Autowired
-    private ScoreService scoreService;
+    private ScoreRepository scoreRepository;
 
     @Autowired
     private PlayerRepository playerRepository;
@@ -57,36 +60,19 @@ public class PlayerController {
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
-
     /**
-     * Adds 1 point to the player's scoreboard.
+     * Subtracts 1 point of the score's scoreboard.
      *
-     * @param playerId the player's ID.
-     * @return 404, if player not found; 200 if one point was added.
+     * @param scoreId the score's ID.
+     * @return 404, if score not found; 200 if score was deleted.
      */
-    @PatchMapping("/{playerId}/plus")
-    private HttpStatus plusScore(@PathVariable("playerId") Long playerId) {
-        if (!playerRepository.exists(playerId)) {
+    @PatchMapping("/{scoreId}/minus")
+    private HttpStatus deleteScore(@PathVariable("scoreId") Long scoreId) {
+        Score score = scoreRepository.findOne(scoreId);
+        if (score == null) {
             return HttpStatus.NOT_FOUND;
         }
-        // Add 1 point
-        scoreService.setScoreboard(playerId, true);
-        return HttpStatus.OK;
-    }
-
-    /**
-     * Subtracts 1 point of the player's scoreboard.
-     *
-     * @param playerId the player's ID.
-     * @return 404, if player not found; 200 if one point was subtracted.
-     */
-    @PatchMapping("/{playerId}/minus")
-    private HttpStatus minusScore(@PathVariable("playerId") Long playerId) {
-        if (!playerRepository.exists(playerId)) {
-            return HttpStatus.NOT_FOUND;
-        }
-        // Remove 1 point
-        scoreService.setScoreboard(playerId, false);
+        scoreRepository.delete(score);
         return HttpStatus.OK;
     }
 

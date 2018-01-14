@@ -1,6 +1,7 @@
 (function() {
 
     var API_PLAYER = 'player';
+    var API_SCORE = 'score';
     var users;
     var selectedPlayer;
 
@@ -31,7 +32,7 @@
 
     var getUsers = function() {
         $.ajax({
-            url: 'user',
+            url: API_PLAYER,
             cache: false
         })
             .done(function (data){
@@ -65,7 +66,7 @@
             var $tdPoint = $(document.createElement('td'))
                 .attr('name', 'point')
                 .addClass('col-sm-1')
-                .text(users[i].score.points);
+                .text(users[i].scores.length);
 
             // Append values
             $trBody.append($tdName);
@@ -90,8 +91,8 @@
         var winner = 0;
 
         for (var i = 0; i < users.length; i++) {
-            if (users[i].score.points > maxScore) {
-                maxScore = users[i].score.points;
+            if (users[i].scores.length > maxScore) {
+                maxScore = users[i].scores.length;
                 winner = '#user-' + users[i].id;
             }
             $(winner).removeClass('success');
@@ -102,31 +103,20 @@
     $('#addPointsModal').on('click', function () {
         if (selectedPlayer && selectedPlayer.hasClass('item-active')) {
             var selectedPlayerId = selectedPlayer.attr('id').replace('user-', '');
+            var columnPoints = $(selectedPlayer.children("td[name='point']")[0]);
+            var actualPoint = Number(columnPoints.text());
             var dateInMilli = new Date($('#dateScore').data('DateTimePicker').date()).getTime();
-            _plusPoint(selectedPlayerId, dateInMilli);
+            _addScore(selectedPlayerId, dateInMilli);
+            columnPoints.text(actualPoint + 1); //FIXME: reload scores
         }
     });
 
-    var _plusPoint = function (selectedPlayerId, dateInMilli) {
-        _points(selectedPlayerId, dateInMilli, true);
-    };
-
-    var _minusPoint = function(selectedPlayerId, dateInMilli) {
-        _points(selectedPlayerId, dateInMilli, false);
-    };
-
-    var _points = function (selectedPlayerId, dateInMilli, plus) {
-        var url = API_PLAYER + '/' + selectedPlayerId;
-
-        if (plus) {
-            url += '/plus';
-        } else {
-            url += '/minus';
-        }
-
-        $.post(url, { date: dateInMilli })
-        .done(function(data) {
-            //$(selectedPlayerId.children("td[name='point']")[0]).text(data.totalPoints);
+    var _addScore = function (selectedPlayerId, dateInMilli) {
+        $.ajax({
+            url: API_SCORE + '/' + selectedPlayerId,
+            method: 'POST',
+            contentType: 'application/json',
+            data : "{ \"date\": " + dateInMilli + " }"
         });
     };
 

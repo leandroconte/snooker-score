@@ -8,10 +8,6 @@ spring:
           username: root
           password: batata22
 
-    jpa:
-      hibernate:
-        ddl-auto: update
-
 server:
     port: 8080
     context-path: /snook
@@ -26,6 +22,9 @@ spring:
         username: root
         password: batata22
 
+  jpa:
+        hibernate:
+          ddl-auto: none
 
 ---
 
@@ -37,6 +36,10 @@ spring:
         url: jdbc:mysql://localhost/snooker?useSSL=false
         username: root
         password: lera77
+
+  jpa:
+        hibernate:
+          ddl-auto: update
 
 
 #logging:

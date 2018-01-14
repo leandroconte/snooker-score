@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * Created by lnd on 10/02/17.
  */
@@ -21,14 +23,10 @@ public class ScoreService {
     }
 
     @Transactional
-    public void setScoreboard(Long playerId, boolean plus) {
+    public void addScore(Long playerId, Score score) {
         Player player = playerRepository.findOne(playerId);
-        Score score = player.getScores();
-        if (plus) {
-            score.setPoints(score.getPoints() + 1);
-        } else {
-            score.setPoints(score.getPoints() - 1);
-        }
+        player.getScores().add(score);
+        playerRepository.save(player);
     }
 
 }
